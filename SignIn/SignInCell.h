@@ -13,6 +13,7 @@ typedef void (^SelectBlock)(NSInteger tag, NSInteger buttonTag);
 @interface SignInCell : UITableViewCell
 @property(nonatomic, copy) NSString *on, *off;
 @property(nonatomic, copy) SelectBlock selectBlock;
+@property(nonatomic, copy) NSString *restReason;
 - (void)setSelectBlock:(SelectBlock)selectBlock;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier height:(CGFloat)height;

@@ -10,13 +10,15 @@
 #import "Sign.h"
 #import <FMDB.h>
 #import "SignInCell.h"
+#import "EditViewController.h"
 
 @interface SignController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic, strong) FMDatabase *db;
-@property(nonatomic, assign) NSInteger day;
+@property(nonatomic, assign) NSInteger day, editSection;
 @property(nonatomic, copy) NSString *tableName;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *datas;
+@property(nonatomic, assign) NSInteger firstDayWeekIndex;
 @end
 
 @implementation SignController
@@ -28,6 +30,7 @@
     self.datas = [NSMutableArray new];
     self.navigationItem.title = FORMAT(@"%@年%@月", self.year, self.month);
     
+    self.firstDayWeekIndex = [self weekIndexAboutFirstDayInMonth];
     [self openDb];
     [self createTable];
     [self queryData];
@@ -47,7 +50,7 @@
 
 - (void)createTable
 {
-    NSString *sql = [NSString stringWithFormat:@"CREATE TABLE %@ (day integer PRIMARY KEY, workon text, workoff test)", self.tableName];
+    NSString *sql = [NSString stringWithFormat:@"CREATE TABLE %@ (day integer PRIMARY KEY, workon text, workoff test, status text, reason text)", self.tableName];
     BOOL result = [self.db executeUpdate:sql];
     if (result) {
         NSLog(@"create db success");
@@ -58,8 +61,8 @@
 
 - (BOOL)insertSign:(Sign *)sign
 {
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ (day, workon, workoff) VALUES (?,?,?)", self.tableName];
-    BOOL status = [self.db executeUpdate:sql, @(sign.day), sign.workOn, sign.workOff];
+    NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ (day, workon, workoff, status, reason) VALUES (?,?,?,?,?)", self.tableName];
+    BOOL status = [self.db executeUpdate:sql, @(sign.day), sign.workOn, sign.workOff, sign.status, sign.reason];
     NSLog(@"插入数据 %@", [self descriptionWithStatus:status]);
     return status;
 }
@@ -67,8 +70,8 @@
 - (BOOL)updateSign:(Sign *)sign
 {
     //更改多个属性 需要注意在中间添加逗号 int等基本类型需要转化成对象类型后才能正确执行
-    NSString *sql = [NSString stringWithFormat:@"UPDATE %@ SET workon = ? , workoff = ? WHERE day = ?", self.tableName];
-    BOOL status = [self.db executeUpdate:sql, sign.workOn, sign.workOff, @(sign.day)];
+    NSString *sql = [NSString stringWithFormat:@"UPDATE %@ SET workon = ? , workoff = ? , status = ? , reason = ? WHERE day = ?", self.tableName];
+    BOOL status = [self.db executeUpdate:sql, sign.workOn, sign.workOff, sign.status, sign.reason, @(sign.day)];
     NSLog(@"修改数据 %@", [self descriptionWithStatus:status]);
     return status;
 }
@@ -82,6 +85,8 @@
         sign.day = [rs intForColumn:@"day"];
         sign.workOn = [rs stringForColumn:@"workon"];
         sign.workOff = [rs stringForColumnIndex:2];
+        sign.status = [rs stringForColumnIndex:3];
+        sign.reason = [rs stringForColumnIndex:4];
         NSLog(@"sign %@", sign);
         
         [self.datas addObject:sign];
@@ -170,6 +175,31 @@
     }
     [cell setOn:sign.workOn];
     [cell setOff:sign.workOff];
+    
+    NSInteger temp = (self.firstDayWeekIndex + indexPath.section) % 7;
+    if (!sign.status ||sign.status.length == 0 ) {
+        //正常都工作日或者休息日
+        if (temp == 1) {
+            cell.restReason = @"星期天";
+        }else if (temp == 0){
+            cell.restReason = @"星期六";
+        }else{
+            cell.restReason = @"";
+        }
+        
+    }else{
+        //工作日变成休息日 或者 休息日变成工作日
+        if ([sign.status isEqualToString:@"on"]) {
+            //工作
+            cell.restReason = @"";
+        }else{
+            //休息
+            cell.restReason = sign.reason;
+        }
+    }
+    
+    
+    
     return cell;
 }
 
@@ -182,15 +212,37 @@
             break;
         }
     }
+    
+    if (action == 3) {
+        
+        self.editSection = day;
+        
+        EditViewController *controller = [[EditViewController alloc]init];
+        NSInteger temp = (self.firstDayWeekIndex + day - 1) % 7;
+        controller.weekend = (temp == 1 || temp == 0);
+        [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
+    
     if (sign) {
         //有记录 更新数据
         if (action == 1) {
             sign.workOn = [self getCurrentTime];
         }else{
+            if (sign.workOn.length == 0) {
+                AlertMessage(@"请先记录上班时间");
+                return;
+            }
+            
+            NSString *time = [self getCurrentTime];
+            if (![self calculateTimeWithOn:sign.workOn off:time]) {
+                AlertMessage(@"时间不够 不能下班");
+                return;
+            }
+            
             sign.workOff = [self getCurrentTime];
         }
         if ([self updateSign:sign]) {
-            [self.datas addObject:sign];
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:day - 1]] withRowAnimation:UITableViewRowAnimationNone];
         }
     }else{
@@ -200,6 +252,16 @@
         if (action == 1) {
             sign.workOn = [self getCurrentTime];
         }else{
+            if (sign.workOn.length == 0) {
+                AlertMessage(@"请先记录上班时间");
+                return;
+            }
+            
+            NSString *time = [self getCurrentTime];
+            if (![self calculateTimeWithOn:sign.workOn off:time]) {
+                AlertMessage(@"时间不够 不能下班");
+                return;
+            }
             sign.workOff = [self getCurrentTime];
         }
         if ([self insertSign:sign]) {
@@ -207,6 +269,45 @@
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:day - 1]] withRowAnimation:UITableViewRowAnimationNone];
         }
     }
+}
+
+- (BOOL)calculateTimeWithOn:(NSString *)on off:(NSString *)off
+{
+    NSArray *onArray = [on componentsSeparatedByString:@":"];
+    NSArray *offArray = [off componentsSeparatedByString:@":"];
+    
+    NSInteger interval = ([offArray[0] integerValue] * 3600 + [offArray[1] integerValue] * 60 + [offArray[2] integerValue]) - ([onArray[0] integerValue] * 3600 + [onArray[1] integerValue] * 60 + [onArray[2] integerValue]);
+    return interval > 9 * 3600;
+}
+
+- (void)editModeWithStatus:(NSString *)status reason:(NSString *)reason
+{
+    Sign *sign = nil;
+    for (Sign *s in self.datas) {
+        if (s.day == self.editSection) {
+            sign = s;
+            break;
+        }
+    }
+    if (!sign) {
+        //插入数据
+        sign = [[Sign alloc]init];
+        sign.day = self.editSection;
+        sign.status = status;
+        sign.reason = reason;
+        if ([self insertSign:sign]) {
+            [self.datas addObject:sign];
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.editSection - 1]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }else{
+        //更新数据
+        sign.status = status;
+        sign.reason = reason;
+        if ([self updateSign:sign]) {
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.editSection - 1]] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }
+    
 }
 
 - (NSInteger)daysInMonth:(NSInteger)month
@@ -230,6 +331,19 @@
             break;
     }
     return days;
+}
+
+//获取某个月都第一天是星期几
+- (NSInteger)weekIndexAboutFirstDayInMonth
+{
+    NSString *dateString = FORMAT(@"%@-%@-1", self.year, self.month);
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    formatter.dateFormat = @"yyyy-M-d";
+    NSDate *date = [formatter dateFromString:dateString];
+    
+    NSCalendar*calendar = [NSCalendar currentCalendar];
+    NSDateComponents*components = [calendar components:NSCalendarUnitWeekday fromDate:date];
+    return [components weekday];
 }
 
 #pragma mark - 增删改查

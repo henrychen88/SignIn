@@ -15,6 +15,7 @@
 		BA3A236E1ACF9EEE00646C33 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3A236D1ACF9EEE00646C33 /* Images.xcassets */; };
 		BA3A23711ACF9EEE00646C33 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3A236F1ACF9EEE00646C33 /* LaunchScreen.xib */; };
 		BA3A237D1ACF9EEE00646C33 /* SignInTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A237C1ACF9EEE00646C33 /* SignInTests.m */; };
+		BA539EC21AD2A4B500B59F46 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA539EC11AD2A4B500B59F46 /* EditViewController.m */; };
 		BAE0B6071ACFA349005B8A36 /* SignController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE0B6041ACFA349005B8A36 /* SignController.m */; };
 		BAE0B6081ACFA349005B8A36 /* SignInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE0B6061ACFA349005B8A36 /* SignInCell.m */; };
 		BAE0B60B1ACFA94B005B8A36 /* Sign.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE0B60A1ACFA94B005B8A36 /* Sign.m */; };
@@ -46,6 +47,8 @@
 		BA3A23761ACF9EEE00646C33 /* SignInTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignInTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3A237B1ACF9EEE00646C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3A237C1ACF9EEE00646C33 /* SignInTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignInTests.m; sourceTree = "<group>"; };
+		BA539EC01AD2A4B500B59F46 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		BA539EC11AD2A4B500B59F46 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		BAE0B6031ACFA349005B8A36 /* SignController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignController.h; sourceTree = "<group>"; };
 		BAE0B6041ACFA349005B8A36 /* SignController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignController.m; sourceTree = "<group>"; };
 		BAE0B6051ACFA349005B8A36 /* SignInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInCell.h; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 				BA3A23601ACF9EEE00646C33 /* Supporting Files */,
 				BAE0B6091ACFA94B005B8A36 /* Sign.h */,
 				BAE0B60A1ACFA94B005B8A36 /* Sign.m */,
+				BA539EC01AD2A4B500B59F46 /* EditViewController.h */,
+				BA539EC11AD2A4B500B59F46 /* EditViewController.m */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 				BAE0B6071ACFA349005B8A36 /* SignController.m in Sources */,
 				BA3A23691ACF9EEE00646C33 /* ViewController.m in Sources */,
 				BAE0B6081ACFA349005B8A36 /* SignInCell.m in Sources */,
+				BA539EC21AD2A4B500B59F46 /* EditViewController.m in Sources */,
 				BA3A23661ACF9EEE00646C33 /* AppDelegate.m in Sources */,
 				BAE0B60B1ACFA94B005B8A36 /* Sign.m in Sources */,
 				BA3A23631ACF9EEE00646C33 /* main.m in Sources */,

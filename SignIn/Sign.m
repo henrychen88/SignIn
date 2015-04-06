@@ -17,6 +17,8 @@
         self.day = 0;
         self.workOn = @"";
         self.workOff = @"";
+        self.status = @"";
+        self.reason = @"";
     }
     return self;
 }

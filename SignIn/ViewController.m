@@ -26,7 +26,7 @@
 
 - (void)setupContent
 {
-    self.navigationItem.title = @"上下班打卡";
+    self.navigationItem.title = @"考勤记录";
     [self getDayInfo];
     [self.view addSubview:self.tableView];
 }
@@ -94,12 +94,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SignController *controller = [[SignController alloc]init];
-    controller.year = FORMAT(@"%ld", self.year);
+    controller.year = FORMAT(@"%ld", (long)self.year);
     NSInteger month = indexPath.row + 1;
     if (indexPath.section == 0) {
         month +=3;
     }
-    controller.month= FORMAT(@"%ld", month);
+    controller.month= FORMAT(@"%ld", (long)month);
     [self.navigationController pushViewController:controller animated:YES];
 }
 

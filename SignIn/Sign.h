@@ -13,4 +13,6 @@
 @property(nonatomic, assign) NSInteger day;
 @property(nonatomic, copy) NSString *workOn;
 @property(nonatomic, copy) NSString *workOff;
+@property(nonatomic, copy) NSString *status;
+@property(nonatomic, copy) NSString *reason;
 @end
