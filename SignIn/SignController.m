@@ -12,13 +12,15 @@
 #import "SignInCell.h"
 #import "EditViewController.h"
 
+#import "FMDBHelper.h"
+
 @interface SignController ()<UITableViewDataSource, UITableViewDelegate>
-@property(nonatomic, strong) FMDatabase *db;
 @property(nonatomic, assign) NSInteger day, editSection;
-@property(nonatomic, copy) NSString *tableName;
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) NSMutableArray *datas;
 @property(nonatomic, assign) NSInteger firstDayWeekIndex;
+@property(nonatomic, strong) FMDBHelper *dbHelper;
+@property(nonatomic, assign) BOOL shouldCloseDB;
 @end
 
 @implementation SignController
@@ -31,79 +33,48 @@
     self.navigationItem.title = FORMAT(@"%@年%@月", self.year, self.month);
     
     self.firstDayWeekIndex = [self weekIndexAboutFirstDayInMonth];
-    [self openDb];
-    [self createTable];
-    [self queryData];
+    
+    self.datas = [self.dbHelper queryData];
+    
+/*
+    Sign *s = [[Sign alloc]init];
+    s.day = 7;
+    s.workOn = @"08:44:48";
+    s.workOff = @"18:33:28";
+    [self.dbHelper updateSign:s];
+    
+    
+    s = [[Sign alloc]init];
+    s.day = 8;
+    s.workOn = @"08:33:07";
+    [self.dbHelper insertSign:s];
+    */
     
     NSLog(@"self.datas : %@", self.datas);
     
     [self.view addSubview:self.tableView];
 }
 
-- (void)openDb
+- (void)viewDidAppear:(BOOL)animated
 {
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *fileName = [path stringByAppendingPathComponent:@"sign.db"];
-    self.db = [FMDatabase databaseWithPath:fileName];
-    [self.db open];
+    [super viewDidAppear:animated];
+    self.shouldCloseDB = YES;
 }
 
-- (void)createTable
+- (void)viewWillDisappear:(BOOL)animated
 {
-    NSString *sql = [NSString stringWithFormat:@"CREATE TABLE %@ (day integer PRIMARY KEY, workon text, workoff test, status text, reason text)", self.tableName];
-    BOOL result = [self.db executeUpdate:sql];
-    if (result) {
-        NSLog(@"create db success");
-    }else{
-        NSLog(@"create failed");
+    [super viewWillDisappear:animated];
+    if (self.shouldCloseDB) {
+        [self.dbHelper closeDB];
     }
 }
 
-- (BOOL)insertSign:(Sign *)sign
+- (FMDBHelper *)dbHelper
 {
-    NSString *sql = [NSString stringWithFormat:@"INSERT INTO %@ (day, workon, workoff, status, reason) VALUES (?,?,?,?,?)", self.tableName];
-    BOOL status = [self.db executeUpdate:sql, @(sign.day), sign.workOn, sign.workOff, sign.status, sign.reason];
-    NSLog(@"插入数据 %@", [self descriptionWithStatus:status]);
-    return status;
-}
-
-- (BOOL)updateSign:(Sign *)sign
-{
-    //更改多个属性 需要注意在中间添加逗号 int等基本类型需要转化成对象类型后才能正确执行
-    NSString *sql = [NSString stringWithFormat:@"UPDATE %@ SET workon = ? , workoff = ? , status = ? , reason = ? WHERE day = ?", self.tableName];
-    BOOL status = [self.db executeUpdate:sql, sign.workOn, sign.workOff, sign.status, sign.reason, @(sign.day)];
-    NSLog(@"修改数据 %@", [self descriptionWithStatus:status]);
-    return status;
-}
-
-- (void)queryData
-{
-    NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@", self.tableName];
-    FMResultSet *rs = [self.db executeQuery:sql];
-    while ([rs next]) {
-        Sign *sign = [[Sign alloc]init];
-        sign.day = [rs intForColumn:@"day"];
-        sign.workOn = [rs stringForColumn:@"workon"];
-        sign.workOff = [rs stringForColumnIndex:2];
-        sign.status = [rs stringForColumnIndex:3];
-        sign.reason = [rs stringForColumnIndex:4];
-        NSLog(@"sign %@", sign);
-        
-        [self.datas addObject:sign];
+    if (!_dbHelper) {
+        _dbHelper = [[FMDBHelper alloc]initWithYear:self.year month:self.month];
     }
-}
-
-- (NSString *)descriptionWithStatus:(BOOL)status
-{
-    return status ? @"成功" : @"失败";
-}
-
-/*
-*   纯数字组成都字符串作为表名在执行sql语句都时候会出错
-*/
-- (NSString *)tableName
-{
-    return [NSString stringWithFormat:@"table%@%@", self.year, self.month];
+    return _dbHelper;
 }
 
 - (NSString *)getCurrentTime
@@ -216,6 +187,7 @@
     if (action == 3) {
         
         self.editSection = day;
+        self.shouldCloseDB = NO;
         
         EditViewController *controller = [[EditViewController alloc]init];
         NSInteger temp = (self.firstDayWeekIndex + day - 1) % 7;
@@ -242,7 +214,7 @@
             
             sign.workOff = [self getCurrentTime];
         }
-        if ([self updateSign:sign]) {
+        if ([self.dbHelper updateSign:sign]) {
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:day - 1]] withRowAnimation:UITableViewRowAnimationNone];
         }
     }else{
@@ -264,7 +236,7 @@
             }
             sign.workOff = [self getCurrentTime];
         }
-        if ([self insertSign:sign]) {
+        if ([self.dbHelper insertSign:sign]) {
             [self.datas addObject:sign];
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:day - 1]] withRowAnimation:UITableViewRowAnimationNone];
         }
@@ -295,7 +267,7 @@
         sign.day = self.editSection;
         sign.status = status;
         sign.reason = reason;
-        if ([self insertSign:sign]) {
+        if ([self.dbHelper insertSign:sign]) {
             [self.datas addObject:sign];
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.editSection - 1]] withRowAnimation:UITableViewRowAnimationNone];
         }
@@ -303,7 +275,7 @@
         //更新数据
         sign.status = status;
         sign.reason = reason;
-        if ([self updateSign:sign]) {
+        if ([self.dbHelper updateSign:sign]) {
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:self.editSection - 1]] withRowAnimation:UITableViewRowAnimationNone];
         }
     }
@@ -345,7 +317,5 @@
     NSDateComponents*components = [calendar components:NSCalendarUnitWeekday fromDate:date];
     return [components weekday];
 }
-
-#pragma mark - 增删改查
 
 @end

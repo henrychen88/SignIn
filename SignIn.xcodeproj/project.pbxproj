@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		767B37B41AD4BA2A0006B01C /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B37B31AD4BA2A0006B01C /* FMDBHelper.m */; };
 		AE8EF087A74F44642CC2D6A0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B1E04B67D8020472C49258 /* libPods.a */; };
 		BA3A23631ACF9EEE00646C33 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A23621ACF9EEE00646C33 /* main.m */; };
 		BA3A23661ACF9EEE00646C33 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A23651ACF9EEE00646C33 /* AppDelegate.m */; };
@@ -33,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		44B1E04B67D8020472C49258 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		767B37B21AD4BA2A0006B01C /* FMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
+		767B37B31AD4BA2A0006B01C /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
+		767B37B51AD4BB7D0006B01C /* SignIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SignIn.entitlements; sourceTree = "<group>"; };
 		A5792EBA7613034DB858F7C0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BA3A235D1ACF9EEE00646C33 /* SignIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3A23611ACF9EEE00646C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -117,6 +121,9 @@
 		BA3A235F1ACF9EEE00646C33 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
+				767B37B51AD4BB7D0006B01C /* SignIn.entitlements */,
+				767B37B21AD4BA2A0006B01C /* FMDBHelper.h */,
+				767B37B31AD4BA2A0006B01C /* FMDBHelper.m */,
 				BAE0B6031ACFA349005B8A36 /* SignController.h */,
 				BAE0B6041ACFA349005B8A36 /* SignController.m */,
 				BAE0B6051ACFA349005B8A36 /* SignInCell.h */,
@@ -214,6 +221,12 @@
 				TargetAttributes = {
 					BA3A235C1ACF9EEE00646C33 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = RJ5V9Y7P4W;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					BA3A23751ACF9EEE00646C33 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -298,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				767B37B41AD4BA2A0006B01C /* FMDBHelper.m in Sources */,
 				BAE0B6071ACFA349005B8A36 /* SignController.m in Sources */,
 				BA3A23691ACF9EEE00646C33 /* ViewController.m in Sources */,
 				BAE0B6081ACFA349005B8A36 /* SignInCell.m in Sources */,
@@ -429,6 +443,7 @@
 			baseConfigurationReference = A5792EBA7613034DB858F7C0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SignIn/SignIn.entitlements;
 				INFOPLIST_FILE = SignIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -440,6 +455,7 @@
 			baseConfigurationReference = F76123C51E2C46025A65B0E7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SignIn/SignIn.entitlements;
 				INFOPLIST_FILE = SignIn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
