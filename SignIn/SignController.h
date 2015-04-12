@@ -11,6 +11,7 @@
 #define     FORMAT(format, ...) [NSString stringWithFormat:(format), ##__VA_ARGS__]
 #define     AlertMessage(msg)   UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];\
     [alert show];
+#define     ContentFrame  CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)
 
 /**
  *  打卡

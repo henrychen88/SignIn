@@ -85,12 +85,28 @@
     return [formatter stringFromDate:date];
 }
 
+/**
+ *  只能编辑当天都数据
+ */
+- (BOOL)canEdit:(NSInteger)rowIndex
+{
+    NSCalendar*calendar = [NSCalendar currentCalendar];
+    NSDateComponents*components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
+    NSInteger year = [components year];
+    NSInteger month = [components month];
+    NSInteger day = [components day];
+    
+    return (self.year.integerValue == year && self.month.integerValue == month && day == rowIndex);
+    
+    // TODO:  xx
+}
+
 #pragma mark - UITableView
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:ContentFrame style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 50;
@@ -193,6 +209,11 @@
         NSInteger temp = (self.firstDayWeekIndex + day - 1) % 7;
         controller.weekend = (temp == 1 || temp == 0);
         [self.navigationController pushViewController:controller animated:YES];
+        return;
+    }
+    
+    if (![self canEdit:day]) {
+        AlertMessage(@"只能编辑当天都数据");
         return;
     }
     

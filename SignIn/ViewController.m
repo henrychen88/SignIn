@@ -47,7 +47,7 @@
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:ContentFrame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 50;
@@ -94,7 +94,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SignController *controller = [[SignController alloc]init];
-    controller.year = FORMAT(@"%ld", (long)self.year);
+    controller.year = FORMAT(@"%ld", 2015 + indexPath.section);
     NSInteger month = indexPath.row + 1;
     if (indexPath.section == 0) {
         month +=3;
