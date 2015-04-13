@@ -21,6 +21,8 @@
 @property(nonatomic, assign) NSInteger firstDayWeekIndex;
 @property(nonatomic, strong) FMDBHelper *dbHelper;
 @property(nonatomic, assign) BOOL shouldCloseDB;
+
+@property(nonatomic, assign) NSInteger realYear, realMonth, realDay;
 @end
 
 @implementation SignController
@@ -30,6 +32,7 @@
     
     self.view.backgroundColor = [UIColor grayColor];
     self.datas = [NSMutableArray new];
+    [self getDayInfo];
     self.navigationItem.title = FORMAT(@"%@年%@月", self.year, self.month);
     
     self.firstDayWeekIndex = [self weekIndexAboutFirstDayInMonth];
@@ -53,12 +56,26 @@
     NSLog(@"self.datas : %@", self.datas);
     
     [self.view addSubview:self.tableView];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     self.shouldCloseDB = YES;
+
+    if (self.month.integerValue != self.realMonth) {
+        return;
+    }
+    
+    if (self.realDay >= 5) {
+        NSInteger section = self.realDay + 3;
+        NSInteger daysInMonth = [self daysInMonth:self.realMonth] - 1;
+        if (section > daysInMonth) {
+            section = daysInMonth;
+        }
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -90,15 +107,18 @@
  */
 - (BOOL)canEdit:(NSInteger)rowIndex
 {
-    NSCalendar*calendar = [NSCalendar currentCalendar];
-    NSDateComponents*components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
-    NSInteger year = [components year];
-    NSInteger month = [components month];
-    NSInteger day = [components day];
-    
-    return (self.year.integerValue == year && self.month.integerValue == month && day == rowIndex);
+    return (self.year.integerValue == self.realYear && self.month.integerValue == self.realMonth && self.realDay == rowIndex);
     
     // TODO:  xx
+}
+
+- (void)getDayInfo
+{
+    NSCalendar*calendar = [NSCalendar currentCalendar];
+    NSDateComponents*components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
+    self.realYear = [components year];
+    self.realMonth = [components month];
+    self.realDay = [components day];
 }
 
 #pragma mark - UITableView

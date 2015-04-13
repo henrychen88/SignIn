@@ -24,6 +24,14 @@
     self.window.rootViewController = naviController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    CFUUIDRef uuidRef =CFUUIDCreate(NULL);
+    CFStringRef uuidStringRef =CFUUIDCreateString(NULL, uuidRef);
+    CFRelease(uuidRef);
+    NSString *uniqueId = (__bridge NSString *)uuidStringRef;
+    CFRelease(uuidStringRef);
+    
+    NSLog(@"xxx : %@", uniqueId);
     return YES;
 }
 
