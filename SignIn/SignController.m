@@ -64,7 +64,7 @@
     [super viewDidAppear:animated];
     self.shouldCloseDB = YES;
 
-    if (self.month.integerValue != self.realMonth) {
+    if (self.month.integerValue != self.realMonth || self.year.integerValue != self.realYear) {
         return;
     }
     
