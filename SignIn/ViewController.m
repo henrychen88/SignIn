@@ -94,12 +94,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SignController *controller = [[SignController alloc]init];
-    controller.year = FORMAT(@"%ld", 2015 + indexPath.section);
+    controller.year = 2015 + indexPath.section;
     NSInteger month = indexPath.row + 1;
     if (indexPath.section == 0) {
         month +=3;
     }
-    controller.month= FORMAT(@"%ld", (long)month);
+    controller.month= month;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

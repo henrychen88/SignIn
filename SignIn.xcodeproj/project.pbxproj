@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		767B37B41AD4BA2A0006B01C /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B37B31AD4BA2A0006B01C /* FMDBHelper.m */; };
+		769501E91AE498DC000068E9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769501E81AE498DC000068E9 /* NotificationCenter.framework */; };
+		769501EF1AE498DC000068E9 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 769501EE1AE498DC000068E9 /* TodayViewController.m */; };
+		769501F11AE498DC000068E9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 769501F01AE498DC000068E9 /* MainInterface.storyboard */; };
+		769501F41AE498DC000068E9 /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 769501E71AE498DC000068E9 /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		769501FB1AE4A332000068E9 /* NSDate+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = 769501FA1AE4A332000068E9 /* NSDate+Help.m */; };
 		AE8EF087A74F44642CC2D6A0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B1E04B67D8020472C49258 /* libPods.a */; };
 		BA3A23631ACF9EEE00646C33 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A23621ACF9EEE00646C33 /* main.m */; };
 		BA3A23661ACF9EEE00646C33 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A23651ACF9EEE00646C33 /* AppDelegate.m */; };
@@ -23,6 +28,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		769501F21AE498DC000068E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA3A23551ACF9EEE00646C33 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 769501E61AE498DC000068E9;
+			remoteInfo = Extension;
+		};
 		BA3A23771ACF9EEE00646C33 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BA3A23551ACF9EEE00646C33 /* Project object */;
@@ -32,11 +44,33 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		769501F81AE498DC000068E9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				769501F41AE498DC000068E9 /* Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		44B1E04B67D8020472C49258 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		767B37B21AD4BA2A0006B01C /* FMDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBHelper.h; sourceTree = "<group>"; };
 		767B37B31AD4BA2A0006B01C /* FMDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBHelper.m; sourceTree = "<group>"; };
 		767B37B51AD4BB7D0006B01C /* SignIn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SignIn.entitlements; sourceTree = "<group>"; };
+		769501E71AE498DC000068E9 /* Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		769501E81AE498DC000068E9 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		769501EC1AE498DC000068E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		769501ED1AE498DC000068E9 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		769501EE1AE498DC000068E9 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		769501F01AE498DC000068E9 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		769501F91AE4A332000068E9 /* NSDate+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Help.h"; sourceTree = "<group>"; };
+		769501FA1AE4A332000068E9 /* NSDate+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Help.m"; sourceTree = "<group>"; };
 		A5792EBA7613034DB858F7C0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BA3A235D1ACF9EEE00646C33 /* SignIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3A23611ACF9EEE00646C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +97,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		769501E41AE498DC000068E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769501E91AE498DC000068E9 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BA3A235A1ACF9EEE00646C33 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -85,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				44B1E04B67D8020472C49258 /* libPods.a */,
+				769501E81AE498DC000068E9 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -98,11 +141,33 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		769501EA1AE498DC000068E9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				769501ED1AE498DC000068E9 /* TodayViewController.h */,
+				769501EE1AE498DC000068E9 /* TodayViewController.m */,
+				769501F01AE498DC000068E9 /* MainInterface.storyboard */,
+				769501EB1AE498DC000068E9 /* Supporting Files */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		769501EB1AE498DC000068E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				769501EC1AE498DC000068E9 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		BA3A23541ACF9EEE00646C33 = {
 			isa = PBXGroup;
 			children = (
+				769501F91AE4A332000068E9 /* NSDate+Help.h */,
+				769501FA1AE4A332000068E9 /* NSDate+Help.m */,
 				BA3A235F1ACF9EEE00646C33 /* SignIn */,
 				BA3A23791ACF9EEE00646C33 /* SignInTests */,
+				769501EA1AE498DC000068E9 /* Extension */,
 				BA3A235E1ACF9EEE00646C33 /* Products */,
 				5794A0164070AED0D8BFECED /* Pods */,
 				495B1D48E2752E1A6A1DBBAF /* Frameworks */,
@@ -114,6 +179,7 @@
 			children = (
 				BA3A235D1ACF9EEE00646C33 /* SignIn.app */,
 				BA3A23761ACF9EEE00646C33 /* SignInTests.xctest */,
+				769501E71AE498DC000068E9 /* Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,6 +239,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		769501E61AE498DC000068E9 /* Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 769501F71AE498DC000068E9 /* Build configuration list for PBXNativeTarget "Extension" */;
+			buildPhases = (
+				769501E31AE498DC000068E9 /* Sources */,
+				769501E41AE498DC000068E9 /* Frameworks */,
+				769501E51AE498DC000068E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Extension;
+			productName = Extension;
+			productReference = 769501E71AE498DC000068E9 /* Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		BA3A235C1ACF9EEE00646C33 /* SignIn */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA3A23801ACF9EEE00646C33 /* Build configuration list for PBXNativeTarget "SignIn" */;
@@ -182,10 +265,12 @@
 				BA3A235A1ACF9EEE00646C33 /* Frameworks */,
 				BA3A235B1ACF9EEE00646C33 /* Resources */,
 				93E5E9E702F9DB64CE5273DC /* Copy Pods Resources */,
+				769501F81AE498DC000068E9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				769501F31AE498DC000068E9 /* PBXTargetDependency */,
 			);
 			name = SignIn;
 			productName = SignIn;
@@ -219,6 +304,10 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "諶俭";
 				TargetAttributes = {
+					769501E61AE498DC000068E9 = {
+						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = RJ5V9Y7P4W;
+					};
 					BA3A235C1ACF9EEE00646C33 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = RJ5V9Y7P4W;
@@ -249,11 +338,20 @@
 			targets = (
 				BA3A235C1ACF9EEE00646C33 /* SignIn */,
 				BA3A23751ACF9EEE00646C33 /* SignInTests */,
+				769501E61AE498DC000068E9 /* Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		769501E51AE498DC000068E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769501F11AE498DC000068E9 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BA3A235B1ACF9EEE00646C33 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,6 +405,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		769501E31AE498DC000068E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				769501EF1AE498DC000068E9 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BA3A23591ACF9EEE00646C33 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -319,6 +425,7 @@
 				BA3A23661ACF9EEE00646C33 /* AppDelegate.m in Sources */,
 				BAE0B60B1ACFA94B005B8A36 /* Sign.m in Sources */,
 				BA3A23631ACF9EEE00646C33 /* main.m in Sources */,
+				769501FB1AE4A332000068E9 /* NSDate+Help.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +440,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		769501F31AE498DC000068E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 769501E61AE498DC000068E9 /* Extension */;
+			targetProxy = 769501F21AE498DC000068E9 /* PBXContainerItemProxy */;
+		};
 		BA3A23781ACF9EEE00646C33 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BA3A235C1ACF9EEE00646C33 /* SignIn */;
@@ -360,6 +472,33 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		769501F51AE498DC000068E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Extension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		769501F61AE498DC000068E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				INFOPLIST_FILE = Extension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		BA3A237E1ACF9EEE00646C33 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -499,6 +638,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		769501F71AE498DC000068E9 /* Build configuration list for PBXNativeTarget "Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				769501F51AE498DC000068E9 /* Debug */,
+				769501F61AE498DC000068E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BA3A23581ACF9EEE00646C33 /* Build configuration list for PBXProject "SignIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

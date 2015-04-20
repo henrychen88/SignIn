@@ -15,12 +15,12 @@
 
 @implementation FMDBHelper
 
-- (id)initWithYear:(NSString *)year month:(NSString *)month
+- (id)initWithYear:(NSInteger)year month:(NSInteger)month
 {
     self = [super init];
     if (self) {
-        self.year = year;
-        self.month = month;
+        self.year = [NSString stringWithFormat:@"%ld", (long)year];
+        self.month = [NSString stringWithFormat:@"%ld", (long)month];
         [self openDb];
         [self createTable];
     }

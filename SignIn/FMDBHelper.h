@@ -18,7 +18,7 @@
 @property(nonatomic, copy) NSString *year;
 @property(nonatomic, copy) NSString *month;
 
-- (id)initWithYear:(NSString *)year month:(NSString *)month;
+- (id)initWithYear:(NSInteger)year month:(NSInteger)month;
 
 - (BOOL)insertSign:(Sign *)sign;
 

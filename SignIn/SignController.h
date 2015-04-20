@@ -17,6 +17,6 @@
  *  打卡
  */
 @interface SignController : UIViewController
-@property(nonatomic, copy) NSString *year, *month;
+@property(nonatomic, assign) NSInteger year, month;
 - (void)editModeWithStatus:(NSString *)status reason:(NSString *)reason;
 @end

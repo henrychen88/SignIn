@@ -33,7 +33,7 @@
     self.view.backgroundColor = [UIColor grayColor];
     self.datas = [NSMutableArray new];
     [self getDayInfo];
-    self.navigationItem.title = FORMAT(@"%@年%@月", self.year, self.month);
+    self.navigationItem.title = FORMAT(@"%ld年%ld月", (long)self.year, (long)self.month);
     
     self.firstDayWeekIndex = [self weekIndexAboutFirstDayInMonth];
     
@@ -64,7 +64,7 @@
     [super viewDidAppear:animated];
     self.shouldCloseDB = YES;
 
-    if (self.month.integerValue != self.realMonth || self.year.integerValue != self.realYear) {
+    if (self.month != self.realMonth || self.year != self.realYear) {
         return;
     }
     
@@ -107,7 +107,7 @@
  */
 - (BOOL)canEdit:(NSInteger)rowIndex
 {
-    return (self.year.integerValue == self.realYear && self.month.integerValue == self.realMonth && self.realDay == rowIndex);
+    return (self.year == self.realYear && self.month == self.realMonth && self.realDay == rowIndex);
     
     // TODO:  xx
 }
@@ -136,7 +136,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self daysInMonth:[self.month integerValue]];
+    return [self daysInMonth:self.month];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -326,7 +326,7 @@
 - (NSInteger)daysInMonth:(NSInteger)month
 {
     NSInteger days = 31;
-    NSInteger year = [self.year integerValue];
+    NSInteger year = self.year;
     switch (month) {
         case 4:
         case 6:
@@ -349,7 +349,7 @@
 //获取某个月都第一天是星期几
 - (NSInteger)weekIndexAboutFirstDayInMonth
 {
-    NSString *dateString = FORMAT(@"%@-%@-1", self.year, self.month);
+    NSString *dateString = FORMAT(@"%ld-%ld-1", (long)self.year, (long)self.month);
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     formatter.dateFormat = @"yyyy-M-d";
     NSDate *date = [formatter dateFromString:dateString];
