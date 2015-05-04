@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import "NSDate+Help.h"
 #import "SignController.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -33,11 +33,10 @@
 
 - (void)getDayInfo
 {
-    NSCalendar*calendar = [NSCalendar currentCalendar];
-    NSDateComponents*components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
-    self.year = [components year];
-    self.month = [components month];
-    self.day = [components day];
+    NSDictionary *dict = [[NSDate date] seperateComponent];
+    self.year = [dict[COMPONENT_YEAR] integerValue];
+    self.month = [dict[COMPONENT_MONTH] integerValue];
+    self.day = [dict[COMPONENT_DAY] integerValue];
     
     // TODO:  xx
 }
@@ -80,7 +79,7 @@
     }
     NSInteger month = 1;
     if (indexPath.section == 0) {
-        month = self.month;
+        month = 4;
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%ld月",  (long)month + indexPath.row];

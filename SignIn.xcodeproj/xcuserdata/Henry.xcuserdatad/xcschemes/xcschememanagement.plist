@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Extension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>SignIn.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>769501E61AE498DC000068E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BA3A235C1ACF9EEE00646C33</key>
 		<dict>
 			<key>primary</key>

@@ -69,8 +69,8 @@
 		769501ED1AE498DC000068E9 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		769501EE1AE498DC000068E9 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
 		769501F01AE498DC000068E9 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		769501F91AE4A332000068E9 /* NSDate+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Help.h"; sourceTree = "<group>"; };
-		769501FA1AE4A332000068E9 /* NSDate+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Help.m"; sourceTree = "<group>"; };
+		769501F91AE4A332000068E9 /* NSDate+Help.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Help.h"; path = "../NSDate+Help.h"; sourceTree = "<group>"; };
+		769501FA1AE4A332000068E9 /* NSDate+Help.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Help.m"; path = "../NSDate+Help.m"; sourceTree = "<group>"; };
 		A5792EBA7613034DB858F7C0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BA3A235D1ACF9EEE00646C33 /* SignIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3A23611ACF9EEE00646C33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -163,8 +163,6 @@
 		BA3A23541ACF9EEE00646C33 = {
 			isa = PBXGroup;
 			children = (
-				769501F91AE4A332000068E9 /* NSDate+Help.h */,
-				769501FA1AE4A332000068E9 /* NSDate+Help.m */,
 				BA3A235F1ACF9EEE00646C33 /* SignIn */,
 				BA3A23791ACF9EEE00646C33 /* SignInTests */,
 				769501EA1AE498DC000068E9 /* Extension */,
@@ -206,6 +204,8 @@
 				BAE0B60A1ACFA94B005B8A36 /* Sign.m */,
 				BA539EC01AD2A4B500B59F46 /* EditViewController.h */,
 				BA539EC11AD2A4B500B59F46 /* EditViewController.m */,
+				769501F91AE4A332000068E9 /* NSDate+Help.h */,
+				769501FA1AE4A332000068E9 /* NSDate+Help.m */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";

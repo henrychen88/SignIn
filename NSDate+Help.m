@@ -13,7 +13,7 @@
 - (NSDictionary *)seperateComponent
 {
     NSCalendar*calendar = [NSCalendar currentCalendar];
-    NSDateComponents*components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
+    NSDateComponents*components = [calendar components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:[NSDate date]];
     
     return @{COMPONENT_YEAR : [NSNumber numberWithInteger:[components year]],
              COMPONENT_MONTH : [NSNumber numberWithInteger:[components month]],

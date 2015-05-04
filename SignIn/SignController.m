@@ -11,6 +11,7 @@
 #import <FMDB.h>
 #import "SignInCell.h"
 #import "EditViewController.h"
+#import "NSDate+Help.h"
 
 #import "FMDBHelper.h"
 
@@ -114,11 +115,10 @@
 
 - (void)getDayInfo
 {
-    NSCalendar*calendar = [NSCalendar currentCalendar];
-    NSDateComponents*components = [calendar components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit) fromDate:[NSDate date]];
-    self.realYear = [components year];
-    self.realMonth = [components month];
-    self.realDay = [components day];
+    NSDictionary *dict = [[NSDate date] seperateComponent];
+    self.realYear = [dict[COMPONENT_YEAR] integerValue];
+    self.realMonth = [dict[COMPONENT_MONTH] integerValue];
+    self.realDay = [dict[COMPONENT_DAY] integerValue];
 }
 
 #pragma mark - UITableView
