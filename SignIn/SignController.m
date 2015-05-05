@@ -58,6 +58,11 @@
     
     [self.view addSubview:self.tableView];
     
+    /*
+    Sign *s = [self.datas objectAtIndex:1];
+    s.workOff = @"18:31:42";
+    [self.dbHelper updateSign:s];
+     */
 }
 
 - (void)viewDidAppear:(BOOL)animated

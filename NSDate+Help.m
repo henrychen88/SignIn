@@ -17,7 +17,7 @@
     
     return @{COMPONENT_YEAR : [NSNumber numberWithInteger:[components year]],
              COMPONENT_MONTH : [NSNumber numberWithInteger:[components month]],
-             COMPONENT_MONTH : [NSNumber numberWithInteger:[components day]]};
+             COMPONENT_DAY : [NSNumber numberWithInteger:[components day]]};
 }
 
 @end
