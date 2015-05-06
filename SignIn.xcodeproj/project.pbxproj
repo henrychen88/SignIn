@@ -22,6 +22,9 @@
 		BA3A23711ACF9EEE00646C33 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3A236F1ACF9EEE00646C33 /* LaunchScreen.xib */; };
 		BA3A237D1ACF9EEE00646C33 /* SignInTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3A237C1ACF9EEE00646C33 /* SignInTests.m */; };
 		BA539EC21AD2A4B500B59F46 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA539EC11AD2A4B500B59F46 /* EditViewController.m */; };
+		BAD202C71AFA09280083815B /* FMDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 767B37B31AD4BA2A0006B01C /* FMDBHelper.m */; };
+		BAD202C81AFA092C0083815B /* Sign.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE0B60A1ACFA94B005B8A36 /* Sign.m */; };
+		BAD202C91AFA097E0083815B /* NSDate+Help.m in Sources */ = {isa = PBXBuildFile; fileRef = 769501FA1AE4A332000068E9 /* NSDate+Help.m */; };
 		BAE0B6071ACFA349005B8A36 /* SignController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE0B6041ACFA349005B8A36 /* SignController.m */; };
 		BAE0B6081ACFA349005B8A36 /* SignInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE0B6061ACFA349005B8A36 /* SignInCell.m */; };
 		BAE0B60B1ACFA94B005B8A36 /* Sign.m in Sources */ = {isa = PBXBuildFile; fileRef = BAE0B60A1ACFA94B005B8A36 /* Sign.m */; };
@@ -87,6 +90,7 @@
 		BA3A237C1ACF9EEE00646C33 /* SignInTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignInTests.m; sourceTree = "<group>"; };
 		BA539EC01AD2A4B500B59F46 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		BA539EC11AD2A4B500B59F46 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		BAD202CA1AFA0B010083815B /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Extension.entitlements; sourceTree = "<group>"; };
 		BAE0B6031ACFA349005B8A36 /* SignController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignController.h; sourceTree = "<group>"; };
 		BAE0B6041ACFA349005B8A36 /* SignController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignController.m; sourceTree = "<group>"; };
 		BAE0B6051ACFA349005B8A36 /* SignInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInCell.h; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 		769501EA1AE498DC000068E9 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				BAD202CA1AFA0B010083815B /* Extension.entitlements */,
 				769501ED1AE498DC000068E9 /* TodayViewController.h */,
 				769501EE1AE498DC000068E9 /* TodayViewController.m */,
 				769501F01AE498DC000068E9 /* MainInterface.storyboard */,
@@ -307,6 +312,11 @@
 					769501E61AE498DC000068E9 = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = RJ5V9Y7P4W;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					BA3A235C1ACF9EEE00646C33 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -409,7 +419,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD202C71AFA09280083815B /* FMDBHelper.m in Sources */,
+				BAD202C81AFA092C0083815B /* Sign.m in Sources */,
 				769501EF1AE498DC000068E9 /* TodayViewController.m in Sources */,
+				BAD202C91AFA097E0083815B /* NSDate+Help.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,7 +487,11 @@
 /* Begin XCBuildConfiguration section */
 		769501F51AE498DC000068E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5792EBA7613034DB858F7C0 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -483,18 +500,24 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
 		769501F61AE498DC000068E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F76123C51E2C46025A65B0E7 /* Pods.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Extension/Extension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = Extension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
