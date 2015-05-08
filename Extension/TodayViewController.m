@@ -68,7 +68,7 @@
     
     NSInteger firstDayWeekIndex = [self weekIndexAboutFirstDayInMonth];
     NSString *title;
-    NSInteger temp = (firstDayWeekIndex + dayIndex) % 7;
+    NSInteger temp = (firstDayWeekIndex + dayIndex - 1) % 7;
     if (!sign.status ||sign.status.length == 0 ) {
         //正常都工作日或者休息日
         if (temp == 1) {
