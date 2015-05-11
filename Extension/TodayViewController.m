@@ -117,8 +117,14 @@
     NSDate *date = [NSDate date];
     
     NSCalendar*calendar = [NSCalendar currentCalendar];
-    NSDateComponents*components = [calendar components:NSCalendarUnitWeekday fromDate:date];
-    return [components weekday];
+    NSDateComponents*components = [calendar components:NSCalendarUnitWeekday | NSCalendarUnitDay fromDate:date];
+    NSInteger weekday = [components weekday];
+    NSInteger dayIndex = [components day];
+    weekday = weekday - dayIndex + 1;
+    while (weekday < 1) {
+        weekday += 7;
+    }
+    return weekday;
 }
 
 - (void)widgetPerformUpdateWithCompletionHandler:(void (^)(NCUpdateResult))completionHandler {
